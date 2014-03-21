@@ -1,4 +1,85 @@
-<h2>Hello World</h2>
-<p>
-  The time is now: <%= Time.now %>
-</p>
+
+<!DOCTYPE html>
+<%
+flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
+%>
+<html>
+<head>
+	<style type="text/css">
+
+	</style>
+<title>Atomic Burger Sweet Sixteen Tournament</title>
+</head>
+
+<body>
+<div class="header"></div>
+<div style="height:5px; background-color:#B68076;"></div>
+<div class="blueSubHeader">Sweet Sixteen Tournament</div>
+
+<div class="section">
+	<div class="circle"><span class="circleNumber">1</span></div>
+	<div class="sectionTitle">What's your flavor?</div>
+	<div class="flavorOptionsSection">
+		<% flavors.each do |flavor| %>
+		<span class="flavorOptions" id="<%= flavor %>">
+			<%= flavor %>
+		</span>
+		<% end %>
+	</div>
+	<div style="clear:both"></div>
+</div>
+
+<div class="section">
+	<div class="circle"><span class="circleNumber">2</span></div>
+	<div class="sectionTitle">Fill out your bracket</div>
+
+	<table>
+<tr>
+  <td class="flavor on" >Chocolate</td>
+  <td></td>
+   <td ></td>
+    <td class="flavor off" style="position:relative; top:30px;"></td>
+  <td class="flavor on">Vanilla</td>
+</tr>
+<tr>
+   <td class="flavor off" >Strawberry</td>
+   <td class="flavor off" style="position:relative; bottom:30px;"></td>
+   <td class="flavor off" style="position:relative; top:50px;"></td> 
+    <td ></td>
+  <td class="flavor off">Espresso</td>
+</tr>
+<tr style="height:70px"> </tr>
+<tr>
+   <td class="flavor off" >Mint</td>
+<td class="flavor off" style="position:relative; top:30px;"></td>
+ <td ></td>
+<td class="flavor off" style="position:relative; top:30px;"></td>
+  <td class="flavor off">Blueberry</td>
+</tr>
+<tr>
+   <td class="flavor off" >Nutella</td>
+  <td ></td>
+   <td ></td>
+   <td></td>
+  <td class="flavor off">Peanut Butter</td>
+</tr>
+</table>
+
+
+<div style="clear:both"></div>
+</div>
+
+<div class="section">
+	<div class="circle"><span class="circleNumber">3</span></div>
+	<div class="sectionTitle">Enter your email</div>
+<div style="clear:both"></div>
+</div>
+
+<div class="section">
+<div class="btnSubmit">
+	submit
+</div>
+</div>
+</body>
+
+</html>
