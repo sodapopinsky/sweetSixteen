@@ -35,6 +35,13 @@ end
 gem 'rails_12factor', group: :production
 
 ruby "2.1.1"
+
+
+  group :production, :staging do
+      gem 'pg'
+      gem 'rails_12factor'
+    end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
