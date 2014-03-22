@@ -1,0 +1,242 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+@font-face {
+  font-family: 'myBemio';
+  font-weight: 'normal';
+  font-style: 'normal';
+  src: url(/assets/Bemio.otf);
+  src: url(/assets/Bemio.otf?#iefix) format("opentype");
+}
+
+@font-face {
+  font-family: 'Serifa';
+  font-weight: 'normal';
+  font-style: 'normal';
+  src: url(/assets/Serifa.otf);
+  src: url(/assets/Serifa.otf?#iefix) format("opentype");
+}
+
+@font-face {
+  font-family: 'SerifaBold';
+  font-weight: 'normal';
+  font-style: 'normal';
+  src: url(/assets/SerifaBold.otf);
+  src: url(/assets/SerifaBold.otf?#iefix) format("opentype");
+}
+
+/* line 42, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+body {
+  font: 100% Serifa, Helvetica, sans-serif;
+  color: #444444;
+}
+
+/* line 50, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.header {
+  height: 85px;
+  background-color: #C50200;
+  background-image: url("/assets/logo.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 20px 25px;
+}
+
+/* line 59, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.blueSubHeader {
+  color: #FFFFFF;
+  font-family: myBemio;
+  font-size: 28px;
+  height: 43px;
+  background-color: #9BDED7;
+  padding-top: 15px;
+  padding-left: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 71, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.circle {
+  position: absolute;
+  left: -80px;
+  width: 60px;
+  height: 60px;
+  background-color: #444444;
+  float: left;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+/* line 87, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.circleNumber {
+  font-family: Bemio;
+  font-size: 32px;
+  color: #FFF;
+  padding-left: 22px;
+  padding-top: 15px;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 97, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.section {
+  margin: 30px 0px 60px 100px;
+  position: relative;
+}
+
+/* line 103, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.sectionTitle {
+  font-family: SerifaBold;
+  font-size: 28px;
+  color: #444444;
+  padding-top: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 111, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.flavorOptionsSection {
+  margin-top: 30px;
+}
+
+/* line 115, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.flavorOptionsOn, .flavorOptionsOff {
+  float: left;
+  cursor: pointer;
+  height: 30px;
+  margin-right: 10px;
+  font-size: 18px;
+  text-align: center;
+  padding: 16px 20px 0px 20px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* line 131, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.flavorOptionsOn {
+  background-color: #9bded7;
+  color: #FFFFFF;
+}
+
+/* line 137, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.flavorOptionsOff {
+  background-color: #FFF;
+  color: #444444;
+}
+
+/* line 141, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.flavorOptionsOff:hover {
+  background-color: #9bded7;
+  color: #FFF;
+}
+
+/* line 145, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.btnSubmit {
+  background-color: #DED516;
+  font-family: myBemio;
+  color: #FFF;
+  font-size: 26px;
+  padding: 5px 20px 5px 20px;
+  float: left;
+  -webkit-font-smoothing: antialiased;
+  box-shadow: none;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* line 162, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+table, tr {
+  width: 950px;
+  padding: 5px;
+}
+
+/* line 168, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+td {
+  width: 160px;
+}
+
+/* line 172, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.flavor {
+  height: 40px;
+  color: #FFF;
+  font-size: 18px;
+  text-align: center;
+  padding-top: 7px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* line 186, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.on {
+  background-color: #9BDED7;
+}
+
+/* line 190, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.off {
+  background-color: #DDD;
+}
+
+/* ******************************************************************** */
+/*                  Generated by: http://csscreator.com                 */
+/* ******************************************************************** */
+/* line 197, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 204, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+#maincol {
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+/* ******************************************************************** */
+/* Clearfix: http://csscreator.com/attributes/containedfloat.php        */
+/* ******************************************************************** */
+/* line 215, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* line 223, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.clearfix {
+  display: inline-block;
+}
+
+/* Hides from IE-mac \*/
+/* line 226, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+* html .clearfix {
+  height: 1%;
+}
+
+/* line 227, /Users/Nick/rails_projects/SweetSixteen/app/assets/stylesheets/welcome.css.scss.erb */
+.clearfix {
+  display: block;
+}
+
+/* End hide from IE-mac */
