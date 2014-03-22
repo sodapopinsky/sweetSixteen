@@ -6,15 +6,105 @@ flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
 <html>
 <head>
 	<script>
+function numberSorter(a, b) {
+  return a - b;
+}
+	
+	var round = 1;
+	var roundMatchups = 8;
+	var roundMatchupNumber = 1;
+	var seedLeft = 0;
+	var seedRight = 15;
+	var winningSeeds = new Array();
+var sweetSixteen = ["1Chocolate", "2Cookie & Cream", "3Vanilla","4Wedding Cake", "5Nutella Marshmallow", "6Strawberry","7Salted Caramel", "8King Cake", "9Mint Chocolate Chip","10Peanut Butter Chocolate Chip", "11Blueberry Cheesecake", "12Espresso", "13Apple Pie", "14 seed", "15 seed", "16 seed"];
+var eliteEight = new Array();
+var finalFour = new Array();
+var championship = new Array();
+var activeBracket = sweetSixteen;
 	function initializeVoter(){
-		var sweetSixteen = ["Chocolate", "Cookie & Cream", "Vanilla","Wedding Cake", "Nutella Marshmallow", "Strawberry","Salted Caramel", "King Cake", "Mint Chocolate Chip","Peanut Butter Chocolate Chip", "Blueberry Cheesecake", "Espresso", "Apple Pie", "14 seed", "15 seed", "16 seed"];
-
-document.getElementsById('matchupLeft').innerHTML = sweetSixteen[0];  
-
-document.getElementsById('matchupRight').innerHTML = sweetSixteen[15]; 
+			
+document.getElementById('matchupLeft').innerHTML = sweetSixteen[0];  
+document.getElementById('matchupRight').innerHTML = sweetSixteen[15]; 
 	}
 	
-	
+	function vote(vote){
+		if(vote == "left"){
+			winningSeeds.push(seedLeft); 
+		}
+		else{
+			winningSeeds.push(seedRight); 
+		}
+		seedLeft++
+		seedRight--;
+		roundMatchupNumber++;
+		
+		if(roundMatchupNumber > roundMatchups){
+			generateNextRound();
+		}
+		else{
+			presentNextMatchup();
+		}
+	}
+
+	function presentNextMatchup(){
+		if(round==5){presentWinner();}
+		else{
+			document.getElementById('matchupLeft').innerHTML = activeBracket[seedLeft]; 
+			document.getElementById('matchupRight').innerHTML = activeBracket[seedRight]; 
+		}
+	}
+
+	function presentWinner(){
+			document.getElementById('winner').innerHTML = championship[seedLeft]; 
+			document.getElementById('winner').style.display = "block";
+			document.getElementById('matchups').style.visibility = "hidden";
+	}
+
+	function generateNextRound(){
+
+			round++;
+			roundMatchups = winningSeeds.length / 2;
+			activeBracket = [];
+			seedLeft = 0;
+			seedRight = winningSeeds.length - 1;
+			roundMatchupNumber = 1;
+			
+			//console.log(winningSeeds);
+			winningSeeds.sort(function(a,b){return a - b});
+			//console.log(winningSeeds);
+
+			if(round == 2){ ///Eite Eight
+			for (index = 0; index < winningSeeds.length; ++index) {
+				
+    			eliteEight.push(sweetSixteen[winningSeeds[index]]);
+			}
+			activeBracket = eliteEight;
+		}
+
+			if(round == 3){ //Final Four
+			for (index = 0; index < winningSeeds.length; ++index) {
+				
+    			finalFour.push(eliteEight[winningSeeds[index]]);
+			}
+			activeBracket = finalFour;
+		}
+
+
+			if(round == 4){ //championship
+			for (index = 0; index < winningSeeds.length; ++index) {
+				
+    			championship.push(finalFour[winningSeeds[index]]);
+    				
+			}
+			activeBracket = championship;
+		}
+		
+
+			winningSeeds = [];
+
+			presentNextMatchup();
+	}
+
 	function myFunction(id)
 {
 	var flavorChoice;
@@ -29,8 +119,8 @@ document.getElementsById('matchupRight').innerHTML = sweetSixteen[15];
 flavorChoice = id;
 document.getElementById(flavorChoice).className = "flavorOptionsOn";
 
-
 }
+
 </script>
 <title>Atomic Burger Sweet Sixteen Tournament</title>
 </head>
@@ -40,10 +130,15 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 <div style="height:5px; background-color:#B68076;"></div>
 <div class="blueSubHeader">Sweet Sixteen Tournament</div>
 
-<div class="section">
-	<div id="matchupLeft">left</div>
-	<div id="matchupRight">right</div>
-	</div>
+<div class="section" style="display:none;" id="winner"></div>
+<div class="section" id="matchups">
+	<div id="matchupLeft" onclick="vote('left')"></div>
+	<div id="matchupRight" onclick="vote('right')"></div>
+</div>
+
+
+
+
 <div class="section" style="visibility:hidden">
 	<div class="circle"><span class="circleNumber">1</span></div>
 	<div class="sectionTitle">What's your favorite flavor?</div>
