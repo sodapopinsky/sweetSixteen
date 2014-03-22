@@ -9,8 +9,8 @@
        weight: 'normal';
        style: 'normal';
     }
-  //  src: asset-url('Bemio.otf', font);
-  //  src:asset-url('Bemio.otf?#iefix') format('opentype');
+   src: asset-url('Bemio.otf', font);
+    src:asset-url('Bemio.otf?#iefix') format('opentype');
 
 }
 
@@ -20,8 +20,8 @@
        weight: 'normal';
        style: 'normal';
     }
- //   src: asset-url('Serifa.otf', font);
-  //  src:asset-url('Serifa.otf?#iefix') format('opentype');
+   src: asset-url('Serifa.otf', font);
+    src:asset-url('Serifa.otf?#iefix') format('opentype');
 
 }
 
@@ -31,12 +31,13 @@
        weight: 'normal';
        style: 'normal';
     }
-  //  src: asset-url('SerifaBold.otf', font);
-   // src:asset-url('SerifaBold.otf?#iefix') format('opentype');
+    src: asset-url('SerifaBold.otf', font);
+   src:asset-url('SerifaBold.otf?#iefix') format('opentype');
 }
 
 $font-stack:    Serifa, Helvetica, sans-serif;
 $primary-color: #444;
+$blue: #9BDED7;
 
 body {
   font: 100% $font-stack;
@@ -82,6 +83,7 @@ padding-left:20px;
 
 }
 
+
 .circleNumber{
 	font-family:Bemio;
 	font-size:32px;
@@ -110,12 +112,36 @@ padding-left:20px;
 	margin-top:30px;
 }
 
-.flavorOptions{
-	padding-right:30px;
-	font-size:18px;
+.flavorOptionsOn, .flavorOptionsOff{
 	float:left;
+	cursor:pointer;
+	height:30px;
+	margin-right:10px;
+	font-size:18px;
+	text-align:center;
+	padding:16px 20px 0px 20px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
 }
 
+.flavorOptionsOn
+{
+	background-color:$blue;
+	color:#FFFFFF;
+}
+
+.flavorOptionsOff
+{
+	background-color:#FFF;
+	color:$primary-color;
+}
+.flavorOptionsOff:hover{
+	background-color:$blue;
+	color:#FFF;
+}
 .btnSubmit{
 	background-color:#DED516;
 	font-family:myBemio;
