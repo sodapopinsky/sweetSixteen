@@ -33,7 +33,7 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 
 <div class="section">
 	<div class="circle"><span class="circleNumber">1</span></div>
-	<div class="sectionTitle">What's your flavor?</div>
+	<div class="sectionTitle">What's your favorite flavor?</div>
 	<div class="flavorOptionsSection">
 		<% flavors.each do |flavor| %>
 		<div onclick="myFunction('<%= flavor %>')" class="flavorOptionsOff" id="<%= flavor %>">
