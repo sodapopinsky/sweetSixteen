@@ -1,14 +1,23 @@
 
 <!DOCTYPE html>
 <%
-flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
+
 %>
 <html>
 <head>
 	<script>
-	var flavorChoice;
+	function initializeVoter(){
+		var sweetSixteen = ["Chocolate", "Cookie & Cream", "Vanilla","Wedding Cake", "Nutella Marshmallow", "Strawberry","Salted Caramel", "King Cake", "Mint Chocolate Chip","Peanut Butter Chocolate Chip", "Blueberry Cheesecake", "Espresso", "Apple Pie", "14 seed", "15 seed", "16 seed"];
+
+document.getElementsById('matchupLeft').innerHTML = sweetSixteen[0];  
+
+document.getElementsById('matchupRight').innerHTML = sweetSixteen[15]; 
+	}
+	
+	
 	function myFunction(id)
 {
+	var flavorChoice;
 	if(document.getElementById(id).className == "flavorOptionsOn"){
 		document.getElementsByClassName('your class');  
 	}
@@ -26,12 +35,16 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 <title>Atomic Burger Sweet Sixteen Tournament</title>
 </head>
 
-<body>
+<body onload="initializeVoter();">
 <div class="header"></div>
 <div style="height:5px; background-color:#B68076;"></div>
 <div class="blueSubHeader">Sweet Sixteen Tournament</div>
 
 <div class="section">
+	<div id="matchupLeft">left</div>
+	<div id="matchupRight">right</div>
+	</div>
+<div class="section" style="visibility:hidden">
 	<div class="circle"><span class="circleNumber">1</span></div>
 	<div class="sectionTitle">What's your favorite flavor?</div>
 	<div class="flavorOptionsSection">
