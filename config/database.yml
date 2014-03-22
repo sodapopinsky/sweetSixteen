@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: Nick
+  database: testapp_development
   pool: 5
   password: joehorn
 
