@@ -5,9 +5,24 @@ flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
 %>
 <html>
 <head>
-	<style type="text/css">
+	<script>
+	var flavorChoice;
+	function myFunction(id)
+{
+	if(document.getElementById(id).className == "flavorOptionsOn"){
+		document.getElementsByClassName('your class');  
+	}
+	if(flavorChoice)
+	document.getElementById(flavorChoice).className = "flavorOptionsOff";
+	else
+	document.getElementById("sectionTwo").style.visibility = "visible";
 
-	</style>
+flavorChoice = id;
+document.getElementById(flavorChoice).className = "flavorOptionsOn";
+
+
+}
+</script>
 <title>Atomic Burger Sweet Sixteen Tournament</title>
 </head>
 
@@ -21,15 +36,16 @@ flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
 	<div class="sectionTitle">What's your flavor?</div>
 	<div class="flavorOptionsSection">
 		<% flavors.each do |flavor| %>
-		<span class="flavorOptions" id="<%= flavor %>">
+		<div onclick="myFunction('<%= flavor %>')" class="flavorOptionsOff" id="<%= flavor %>">
 			<%= flavor %>
-		</span>
+		</div>
 		<% end %>
+		
 	</div>
 	<div style="clear:both"></div>
 </div>
 
-<div class="section">
+<div class="section" style="visibility:hidden" id="sectionTwo">
 	<div class="circle"><span class="circleNumber">2</span></div>
 	<div class="sectionTitle">Fill out your bracket</div>
 
@@ -69,7 +85,7 @@ flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
 <div style="clear:both"></div>
 </div>
 
-<div class="section">
+<div class="section" style="visibility:hidden">
 	<div class="circle"><span class="circleNumber">3</span></div>
 	<div class="sectionTitle">Enter your email</div>
 <div style="clear:both"></div>
