@@ -47,34 +47,27 @@ function getflavor(flavor){
 function Matchup(favorite,underdog, target){
 	this.favorite = favorite;
 	this.underdog = underdog;
-	
 	this.targetPos = target;
-	this.flavorOne;
-	this.flavorTwo;
-	over = 0;
 	}
 	Matchup.prototype.advance = function(winner){
 		if(winner == "favorite"){
-			//document.getElementById(this.underdog).className = "flavorOptionsOff";
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.favorite).innerHTML;
 			document.getElementById(this.targetPos).className = "flavorOptionsOn";
 		}
 		else{
-			//document.getElementById(this.favorite).className = "flavorOptionsOff";
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.underdog).innerHTML;
 			document.getElementById(this.targetPos).className = "flavorOptionsOn";
 		}
-		
-		
-		this.over = 1;
+
 	}
 
-var ffOne = new Matchup('ffOneFavorite','ffOneUnderdog', null);
-var ffOne = new Matchup('ffTwoFavorite','ffTwoUnderdog', null);
+var championship = new Matchup('championshipFavorite','championshipUnderdog', null);
+var ffOne = new Matchup('ffOneFavorite','ffOneUnderdog', 'championshipFavorite');
+var ffTwo = new Matchup('ffTwoFavorite','ffTwoUnderdog', 'championshipUnderdog');
 
 var eeOne = new Matchup('eeOneFavorite','eeOneUnderdog', 'ffOneFavorite');
 var eeTwo = new Matchup('eeTwoFavorite','eeTwoUnderdog', 'ffOneUnderdog');
-var eeThree = new Matchup('eeThreeFavorite','eeThreeUnderdog', 'ffTwoUnderdog');
+var eeThree = new Matchup('eeThreeFavorite','eeThreeUnderdog', 'ffTwoFavorite');
 var eeFour = new Matchup('eeFourFavorite','eeFourUnderdog', 'ffTwoUnderdog');
 
 var ssOne = new Matchup('ssOneFavorite','ssOneUnderdog',  'eeOneFavorite');
@@ -275,7 +268,7 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
   <td  class="flavorOptionsOff" onclick="eeOne.advance('favorite')"  id="eeOneFavorite"></td>
   <td></td>
    <td ></td>
-    <td class="flavorOptionsOff" style="position:relative; top:30px;"></td>
+    <td class="flavorOptionsOff"  onclick="ffTwo.advance('favorite')"  id="ffTwoFavorite"></td>
   <td class="flavorOptionsOff" onclick="eeThree.advance('favorite')" id="eeThreeFavorite"></td>
  	<td class="flavorOptionsOn" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog">Peanut Butter</td>
 </tr>
@@ -285,7 +278,7 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 		<td class="flavorOptionsOn" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite">Vanilla</td>
    <td  class="flavorOptionsOff" onclick="eeOne.advance('underdog')" id="eeOneUnderdog"></td>
    <td class="flavorOptionsOff" onclick="ffOne.advance('favorite')"  id="ffOneFavorite"></td>
-   <td class="flavorOptionsOff" style="position:relative; top:50px;"></td> 
+   <td class="flavorOptionsOff" onclick="championship.advance('favorite')"  id="championshipFavorite"></td> 
     <td ></td>
    <td class="flavorOptionsOff" onclick="eeThree.advance('underdog')" id="eeThreeUnderdog"></td>
  	<td class="flavorOptionsOn" onclick="ssSix.advance('favorite')"  id="ssSixFavorite">Blueberry</td>
@@ -303,9 +296,9 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 <tr>
 		<td class="flavorOptionsOn"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite">Wedding Cake</td>
    <td class="flavorOptionsOff" onclick="eeTwo.advance('favorite')" id="eeTwoFavorite"></td>
-<td class="flavorOptionsOff" id="ffOneUnderdog"></td>
- <td ></td>
-<td class="flavorOptionsOff" style="position:relative; top:30px;"></td>
+<td class="flavorOptionsOff" onclick="ffOne.advance('underdog')" id="ffOneUnderdog"></td>
+  <td class="flavorOptionsOff"  id="championshipUnderdog" ></td> 
+<td class="flavorOptionsOff" onclick="ffTwo.advance('underdog')" id="ffTwoUnderdog"></td>
    <td class="flavorOptionsOff" onclick="eeFour.advance('favorite')" id="eeFourFavorite"></td>
  	<td class="flavorOptionsOn" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite">Salted Caramel</td>
 </tr>
