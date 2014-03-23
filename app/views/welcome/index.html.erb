@@ -6,6 +6,8 @@ flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
 <html>
 <head>
 	<script>
+	
+
 function numberSorter(a, b) {
   return a - b;
 }
@@ -21,6 +23,82 @@ var eliteEight = new Array();
 var finalFour = new Array();
 var championship = new Array();
 var activeBracket = sweetSixteen;
+
+
+function Flavor(flavor,seed, matchup){
+	this.flavor = flavor;
+	this.seed = seed;
+	this.stillAlive = 1;
+	this.round = 1;
+	this.matchup = matchup;
+}
+Flavor.prototype.advance = function(){
+	this.round = this.round + 1;
+	console.log("her");
+	this.matchup.addTo(this);
+}
+function getflavor(flavor){
+	console.log("her");
+	console.log(flavor.seed);
+}
+
+
+
+function Matchup(favorite,underdog, target){
+	this.favorite = favorite;
+	this.underdog = underdog;
+	
+	this.targetPos = target;
+	this.flavorOne;
+	this.flavorTwo;
+	over = 0;
+	}
+	Matchup.prototype.advance = function(winner){
+		if(winner == "favorite"){
+			//document.getElementById(this.underdog).className = "flavorOptionsOff";
+			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.favorite).innerHTML;
+			document.getElementById(this.targetPos).className = "flavorOptionsOn";
+		}
+		else{
+			//document.getElementById(this.favorite).className = "flavorOptionsOff";
+			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.underdog).innerHTML;
+			document.getElementById(this.targetPos).className = "flavorOptionsOn";
+		}
+		
+		
+		this.over = 1;
+	}
+
+var ffOne = new Matchup('ffOneFavorite','ffOneUnderdog', null);
+var ffOne = new Matchup('ffTwoFavorite','ffTwoUnderdog', null);
+
+var eeOne = new Matchup('eeOneFavorite','eeOneUnderdog', 'ffOneFavorite');
+var eeTwo = new Matchup('eeTwoFavorite','eeTwoUnderdog', 'ffOneUnderdog');
+var eeThree = new Matchup('eeThreeFavorite','eeThreeUnderdog', 'ffTwoUnderdog');
+var eeFour = new Matchup('eeFourFavorite','eeFourUnderdog', 'ffTwoUnderdog');
+
+var ssOne = new Matchup('ssOneFavorite','ssOneUnderdog',  'eeOneFavorite');
+var ssTwo = new Matchup('ssTwoFavorite','ssTwoUnderdog',  'eeOneUnderdog');
+var ssThree = new Matchup('ssThreeFavorite','ssThreeUnderdog', 'eeTwoFavorite');
+var ssFour = new Matchup('ssFourFavorite','ssFourUnderdog','eeTwoUnderdog');
+
+var ssFive = new Matchup('ssFiveFavorite','ssFiveUnderdog',  'eeThreeFavorite');
+var ssSix = new Matchup('ssSixFavorite','ssSixUnderdog',  'eeThreeUnderdog');
+var ssSeven = new Matchup('ssSevenFavorite','ssSevenUnderdog', 'eeFourFavorite');
+var ssEight = new Matchup('ssEightFavorite','ssEightUnderdog','eeFourUnderdog');
+
+var chocolate = new Flavor("chocolate",1);
+ssOne.flavorOne = chocolate;
+var kingCake= new Flavor("king cake",16);
+ssOne.flavorTwo = kingCake;
+//var ssOne = new Matchup(chocolate, kingCake);
+//ssOne.nextMatchupId = eeOne;
+
+//var strawberry = new Flavor("strawberry",2);
+//var vanilla = new Flavor("vanilla",15);
+
+
+
 	function initializeVoter(){
 
 			for (index = 0; index < sweetSixteen.length; ++index) {
@@ -28,7 +106,8 @@ var activeBracket = sweetSixteen;
 				var str = '16_' + n;
 				
 				document.getElementById(str).innerHTML = sweetSixteen[index];
-				
+				var matchupOne = new Matchup(0,15);
+				console.log(sweetSixteen[matchupOne.seedOne]);
 			}
 
 
@@ -38,10 +117,16 @@ document.getElementById('matchupRight').innerHTML = sweetSixteen[15];
 	
 	function vote(vote){
 		if(vote == "left"){
-			winningSeeds.push(seedLeft); 
+			winningSeeds.push(seedLeft);
+			var str = '16_' + (seedRight + 1);
+		
+			document.getElementById(str).className = "flavorOptionsOff"; 
 		}
 		else{
 			winningSeeds.push(seedRight); 
+			var str = '16_' + (seedLeft + 1);
+	
+			document.getElementById(str).className = "flavorOptionsOff"; 
 		}
 		seedLeft++
 		seedRight--;
@@ -149,12 +234,13 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 <title>Atomic Burger Sweet Sixteen Tournament</title>
 </head>
 
-<body onload="initializeVoter();">
+<body>
 <div class="header"><div class="logo"></div></div>
 <div style="height:5px; background-color:#B68076;"></div>
 <div class="blueSubHeader"><div class="subHeaderText">Sweet Sixteen Tournament</div></div>
 
-<div class="container">
+<div class="container" style="display:none">
+	
 <div class="section" style="display:none;" id="winner"></div>
 <div class="circleNumber" id="round" style="height:20px; width:500px;font-size:18px; color:#555;margin-left:auto; margin-right:auto; text-align:center;">Sweet Sixteen</div>
 <div class="section" id="matchups" style="width:470px; margin-top:15px; margin-left:auto; margin-right:auto; height:150px;">
@@ -168,100 +254,87 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 
 
 
-<div class="section" style="visibility:hidden">
-	<div class="circle"><span class="circleNumber">1</span></div>
-	<div class="sectionTitle">What's your favorite flavor?</div>
-	<div class="flavorOptionsSection">
-		<% flavors.each do |flavor| %>
-		<div onclick="myFunction('<%= flavor %>')" class="flavorOptionsOff" id="<%= flavor %>">
-			<%= flavor %>
-		</div>
-		<% end %>
-		
-	</div>
-	<div style="clear:both"></div>
-</div>
 
-<div class="section" id="sectionTwo">
-	<div class="circle"><span class="circleNumber">2</span></div>
-	
+
+<div style="width:900px; margin-left:auto; margin-right:auto; margin-top:20px;" id="sectionTwo">
+
 
 	<table>
 		<tr>
-	<td class="flavor off" id="16_1">16_1</td>
+	<td class="flavorOptionsOn" onclick="ssOne.advance('favorite')"  id="ssOneFavorite">Chocolate</td>
    <td ></td>
   <td ></td>
    <td ></td>
    <td></td>
-  <td>8_5</td>
-  <td  class="flavor off" id="16_2">16_2</td>
+  <td></td>
+  <td  class="flavorOptionsOn" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite">Mint</td>
 </tr>
 
 <tr>
-		<td class="flavor off" id="16_16">16_16</td>
-  <td class="flavor on" id="8_1"></td>
+		<td class="flavorOptionsOn" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog">King Cake</td>
+  <td  class="flavorOptionsOff" onclick="eeOne.advance('favorite')"  id="eeOneFavorite"></td>
   <td></td>
    <td ></td>
-    <td class="flavor off" style="position:relative; top:30px;"></td>
-  <td class="flavor on" id="8_3"></td>
- 	<td class="flavor off" id="16_15" >16_15</td>
+    <td class="flavorOptionsOff" style="position:relative; top:30px;"></td>
+  <td class="flavorOptionsOff" onclick="eeThree.advance('favorite')" id="eeThreeFavorite"></td>
+ 	<td class="flavorOptionsOn" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog">Peanut Butter</td>
 </tr>
 
 
 <tr>
-		<td class="flavor off" id="16_3">16_3</td>
-   <td class="flavor off" id="8_8"></td>
-   <td class="flavor off" style="position:relative; bottom:30px;"></td>
-   <td class="flavor off" style="position:relative; top:50px;"></td> 
+		<td class="flavorOptionsOn" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite">Vanilla</td>
+   <td  class="flavorOptionsOff" onclick="eeOne.advance('underdog')" id="eeOneUnderdog"></td>
+   <td class="flavorOptionsOff" onclick="ffOne.advance('favorite')"  id="ffOneFavorite"></td>
+   <td class="flavorOptionsOff" style="position:relative; top:50px;"></td> 
     <td ></td>
-  <td class="flavor off" id="8_6"></td>
- 	<td class="flavor off" id="16_4">16_4</td>
+   <td class="flavorOptionsOff" onclick="eeThree.advance('underdog')" id="eeThreeUnderdog"></td>
+ 	<td class="flavorOptionsOn" onclick="ssSix.advance('favorite')"  id="ssSixFavorite">Blueberry</td>
 </tr>
 <tr>
-	<td class="flavor off" id="16_14">16_14</td>
+	<td class="flavorOptionsOn" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog">Strawberry</td>
    <td ></td>
   <td ></td>
    <td ></td>
    <td></td>
-  <td>8_5</td>
-  <td  class="flavor off" id="16_13">16_13</td>
+  <td></td>
+  <td  class="flavorOptionsOn" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog">Cookies n Cream</td>
 </tr>
 
 <tr>
-		<td class="flavor off"id="16_5" >16_5</td>
-   <td class="flavor off" id="8_2"></td>
-<td class="flavor off" style="position:relative; top:30px;"></td>
+		<td class="flavorOptionsOn"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite">Wedding Cake</td>
+   <td class="flavorOptionsOff" onclick="eeTwo.advance('favorite')" id="eeTwoFavorite"></td>
+<td class="flavorOptionsOff" id="ffOneUnderdog"></td>
  <td ></td>
-<td class="flavor off" style="position:relative; top:30px;"></td>
-  <td class="flavor off" id="8_4"></td>
- 	<td class="flavor off" id="16_6">16_6</td>
+<td class="flavorOptionsOff" style="position:relative; top:30px;"></td>
+   <td class="flavorOptionsOff" onclick="eeFour.advance('favorite')" id="eeFourFavorite"></td>
+ 	<td class="flavorOptionsOn" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite">Salted Caramel</td>
 </tr>
 <tr>
-		<td class="flavor off" id="16_12" >16_12</td>
-   <td class="flavor off" id="8_7" ></td>
+		<td class="flavorOptionsOn" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog">16_12</td>
+   <td class="flavorOptionsOff" onclick="eeTwo.advance('underdog')" id="eeTwoUnderdog"></td>
   <td ></td>
    <td ></td>
    <td></td>
-  <td class="flavor off" id="8_5"></td>
-	<td class="flavor off" id="16_11" >16_11</td>
+ <td class="flavorOptionsOff" onclick="eeFour.advance('underdog')" id="eeFourUnderdog"></td>
+	<td class="flavorOptionsOn" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog">Apple Pie</td>
 </tr>
 <tr>
-	<td class="flavor off" id="16_7" >16_7</td>
-   <td ></td>
-  <td ></td>
-   <td ></td>
-   <td></td>
-  <td>8_5</td>
-  <td  class="flavor off" id="16_8">16_8</td>
-</tr>
-<tr>
-	<td class="flavor off" id="16_10">16_10</td>
+	<td class="flavorOptionsOn" onclick="ssFour.advance('favorite')"  id="ssFourFavorite">16_7</td>
    <td ></td>
   <td ></td>
    <td ></td>
    <td></td>
-  <td>8_5</td>
-  <td  class="flavor off" id="16_9">16_9</td>
+  <td></td>
+  <td  class="flavorOptionsOn" onclick="ssEight.advance('favorite')"  id="ssEightFavorite">Espresso</td>
+</tr>
+<tr>
+	<td class="flavorOptionsOn" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog">16_10</td>
+   <td ></td>
+  <td ></td>
+   <td ></td>
+   <td></td>
+  <td></td>
+  <td  class="flavorOptionsOn" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog">StrawberryCheesecake</td>
 </tr>
 </table>
 
