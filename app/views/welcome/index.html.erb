@@ -1,49 +1,9 @@
 
 <!DOCTYPE html>
-<%
-flavors = ["Chocolate", "Vanilla", "Salted Caramel"];
-%>
 <html>
 <head>
 	<script>
 	
-
-function numberSorter(a, b) {
-  return a - b;
-}
-	
-	var round = 1;
-	var roundMatchups = 8;
-	var roundMatchupNumber = 1;
-	var seedLeft = 0;
-	var seedRight = 15;
-	var winningSeeds = new Array();
-var sweetSixteen = ["Chocolate", "Cookie & Cream", "Vanilla","Wedding Cake", "Nutella Marshmallow", "Strawberry","Salted Caramel", "King Cake", "Mint Chocolate Chip","Peanut Butter Chocolate Chip", "Blueberry Cheesecake", "Espresso", "Apple Pie", "14 seed", "15 seed", "16 seed"];
-var eliteEight = new Array();
-var finalFour = new Array();
-var championship = new Array();
-var activeBracket = sweetSixteen;
-
-
-function Flavor(flavor,seed, matchup){
-	this.flavor = flavor;
-	this.seed = seed;
-	this.stillAlive = 1;
-	this.round = 1;
-	this.matchup = matchup;
-}
-Flavor.prototype.advance = function(){
-	this.round = this.round + 1;
-	console.log("her");
-	this.matchup.addTo(this);
-}
-function getflavor(flavor){
-	console.log("her");
-	console.log(flavor.seed);
-}
-
-
-
 function Matchup(favorite,underdog, target){
 	this.favorite = favorite;
 	this.underdog = underdog;
@@ -80,150 +40,8 @@ var ssSix = new Matchup('ssSixFavorite','ssSixUnderdog',  'eeThreeUnderdog');
 var ssSeven = new Matchup('ssSevenFavorite','ssSevenUnderdog', 'eeFourFavorite');
 var ssEight = new Matchup('ssEightFavorite','ssEightUnderdog','eeFourUnderdog');
 
-var chocolate = new Flavor("chocolate",1);
-ssOne.flavorOne = chocolate;
-var kingCake= new Flavor("king cake",16);
-ssOne.flavorTwo = kingCake;
-//var ssOne = new Matchup(chocolate, kingCake);
-//ssOne.nextMatchupId = eeOne;
-
-//var strawberry = new Flavor("strawberry",2);
-//var vanilla = new Flavor("vanilla",15);
-
-
-
-	function initializeVoter(){
-
-			for (index = 0; index < sweetSixteen.length; ++index) {
-				var n = index + 1;
-				var str = '16_' + n;
-				
-				document.getElementById(str).innerHTML = sweetSixteen[index];
-				var matchupOne = new Matchup(0,15);
-				console.log(sweetSixteen[matchupOne.seedOne]);
-			}
-
-
-document.getElementById('matchupLeft').innerHTML = sweetSixteen[0];  
-document.getElementById('matchupRight').innerHTML = sweetSixteen[15]; 
-	}
-	
-	function vote(vote){
-		if(vote == "left"){
-			winningSeeds.push(seedLeft);
-			var str = '16_' + (seedRight + 1);
-		
-			document.getElementById(str).className = "flavorOptionsOff"; 
-		}
-		else{
-			winningSeeds.push(seedRight); 
-			var str = '16_' + (seedLeft + 1);
-	
-			document.getElementById(str).className = "flavorOptionsOff"; 
-		}
-		seedLeft++
-		seedRight--;
-		roundMatchupNumber++;
-		
-		if(roundMatchupNumber > roundMatchups){
-			generateNextRound();
-		}
-		else{
-			presentNextMatchup();
-		}
-	}
-
-	function presentNextMatchup(){
-		if(round==5){presentWinner();}
-		else{
-			document.getElementById('matchupLeft').innerHTML = activeBracket[seedLeft]; 
-			document.getElementById('matchupRight').innerHTML = activeBracket[seedRight]; 
-		}
-	}
-
-	function presentWinner(){
-			document.getElementById('winner').innerHTML = championship[seedLeft]; 
-			document.getElementById('winner').style.display = "block";
-			document.getElementById('matchups').style.visibility = "hidden";
-	}
-
-	function generateNextRound(){
-
-			round++;
-			roundMatchups = winningSeeds.length / 2;
-			activeBracket = [];
-			seedLeft = 0;
-			seedRight = winningSeeds.length - 1;
-			roundMatchupNumber = 1;
-			
-			//console.log(winningSeeds);
-			winningSeeds.sort(function(a,b){return a - b});
-			//console.log(winningSeeds);
-
-			if(round == 2){ ///Eite Eight
-			for (index = 0; index < winningSeeds.length; ++index) {
-    			eliteEight.push(sweetSixteen[winningSeeds[index]]);
-			}
-			populateEliteEight();
-			document.getElementById('round').innerHTML= "Elite Eight";
-			activeBracket = eliteEight;
-		}
-
-			if(round == 3){ //Final Four
-			for (index = 0; index < winningSeeds.length; ++index) {
-				
-    			finalFour.push(eliteEight[winningSeeds[index]]);
-			}
-			activeBracket = finalFour;
-		
-			document.getElementById('round').innerHTML= "Final Four";
-		}
-
-
-			if(round == 4){ //championship
-			for (index = 0; index < winningSeeds.length; ++index) {
-				
-    			championship.push(finalFour[winningSeeds[index]]);
-    				
-			}
-			activeBracket = championship;
-			document.getElementById('round').innerHTML= "Championship!";
-		}
-		
-
-			winningSeeds = [];
-
-			presentNextMatchup();
-	}
-
-	function populateEliteEight(){
-
-			for (index = 0; index < eliteEight.length; ++index) {
-				var n = index + 1;
-				var str = '8_' + n;
-				console.log(winningSeeds);
-				document.getElementById(str).innerHTML = eliteEight[index];
-				
-			}
-	}
-
-	function myFunction(id)
-{
-	var flavorChoice;
-	if(document.getElementById(id).className == "flavorOptionsOn"){
-		document.getElementsByClassName('your class');  
-	}
-	if(flavorChoice)
-	document.getElementById(flavorChoice).className = "flavorOptionsOff";
-	else
-	document.getElementById("sectionTwo").style.visibility = "visible";
-
-flavorChoice = id;
-document.getElementById(flavorChoice).className = "flavorOptionsOn";
-
-}
-
 </script>
+
 <title>Atomic Burger Sweet Sixteen Tournament</title>
 </head>
 
@@ -232,120 +50,86 @@ document.getElementById(flavorChoice).className = "flavorOptionsOn";
 <div style="height:5px; background-color:#B68076;"></div>
 <div class="blueSubHeader"><div class="subHeaderText">Sweet Sixteen Tournament</div></div>
 
-<div class="container" style="display:none">
-	
-<div class="section" style="display:none;" id="winner"></div>
-<div class="circleNumber" id="round" style="height:20px; width:500px;font-size:18px; color:#555;margin-left:auto; margin-right:auto; text-align:center;">Sweet Sixteen</div>
-<div class="section" id="matchups" style="width:470px; margin-top:15px; margin-left:auto; margin-right:auto; height:150px;">
 
-	<div id="matchupLeft" class="flavorOptionsOff" onclick="vote('left')"></div>
-	<div class="circleNumber" style="float:left; padding-top:5px; margin-left:12px; text-align:center; color:#333;">vs</div>
-	<div id="matchupRight" class="flavorOptionsOff" style="float:right" onclick="vote('right')"></div>
-	<div style="clear:both"></div>
+
+
+
+
+<div class="container">
+	<div class="welcome">
+		<div class="picCircle"></div>
+		<h1 style="margin-top:5px;">Hi Person!</h1>
+		<h2>Welcome to our sweet sixteen tournament!</h2>
+	</div>
+	<div class="whiteBox">
+	What do you think the most popular flavors are?  Fill out your bracket below.  If you get it right, we’ll give you something sweet!
 </div>
-</div>
+	<div id="bracket" style="position:relative; height:460px; margin-left:auto; margin-right:auto; margin-top:20px;  width:930px;">
+
+		<!--Sweet Sixteen -->
+		<div class="flavorOptionsOn" onclick="ssOne.advance('favorite')"  id="ssOneFavorite" style="top:0px; left:0px">Chocolate</div>
+		<div class="flavorOptionsOn" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog" style="top:50px; left:0px">King Cake</div>
+
+		<div class="flavorOptionsOn" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite" style="top:120px; left:0px">Vanilla</div>
+		<div class="flavorOptionsOn" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog" style="top:170px; left:0px">Strawberry</div>
+
+		<div class="flavorOptionsOn"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite" style="top:240px; left:0px">Wedding Cake</div>
+		<div class="flavorOptionsOn" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog" style="top:290px; left:0px">16_12</div>
+
+		<div class="flavorOptionsOn" onclick="ssFour.advance('favorite')"  id="ssFourFavorite" style="top:360px; left:0px">Tiramisu</div>
+		<div class="flavorOptionsOn" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog" style="top:410px; left:0px">16_10</div>
+
+		<div  class="flavorOptionsOn" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite" style="top:0px; right:0px">Mint</div>
+		<div class="flavorOptionsOn" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog" style="top:50px; right:0px">Peanut Butter</div>
+		
+		<div class="flavorOptionsOn" onclick="ssSix.advance('favorite')"  id="ssSixFavorite" style="top:120px; right:0px">Blueberry</div>
+		<div  class="flavorOptionsOn" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog" style="top:170px; right:0px">Cookies n Cream</div>
+		
+		<div class="flavorOptionsOn" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite" style="top:240px; right:0px">Salted Caramel</div>
+		<div  class="flavorOptionsOn" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog" style="top:290px; right:0px">StrawberryCheesecake</div>
+
+		<div  class="flavorOptionsOn" onclick="ssEight.advance('favorite')"  id="ssEightFavorite" style="top:360px; right:0px">Espresso</div>
+		<div  class="flavorOptionsOn" onclick="ssEight.advance('underdog')"  id="ssEightUnderdog" style="top:410px; right:0px">Espresso</div>
+		
+		<!--Elite Eight -->
+		  <div  class="flavorOptionsInactive" onclick="eeOne.advance('favorite')"  id="eeOneFavorite" style="top:27px; left:155px"></div>
+		  <div   class="flavorOptionsInactive"  onclick="eeOne.advance('underdog')" id="eeOneUnderdog" style="top:147px; left:155px"></div>
+
+ 		  <div  class="flavorOptionsInactive"  onclick="eeTwo.advance('favorite')" id="eeTwoFavorite" style="top:267px; left:155px"></div>
+		  <div  class="flavorOptionsInactive"  onclick="eeTwo.advance('underdog')" id="eeTwoUnderdog" style="top:387px; left:155px"></div>
+
+		  <div  class="flavorOptionsInactive"  onclick="eeThree.advance('favorite')" id="eeThreeFavorite" style="top:27px; right:155px"></div>
+		  <div  class="flavorOptionsInactive"  onclick="eeThree.advance('underdog')" id="eeThreeUnderdog" style="top:147px; right:155px"></div>
+
+		  <div  class="flavorOptionsInactive"  onclick="eeFour.advance('favorite')" id="eeFourFavorite" style="top:267px; right:155px"></div>
+		  <div  class="flavorOptionsInactive"  onclick="eeFour.advance('underdog')" id="eeFourUnderdog" style="top:387px; right:155px"></div>
+
+		  <div class="eeVerticalLine" style="left:225px; top:81px;"></div>
+		  <div class="eeVerticalLine" style="left:225px; top:324px;"></div>
+		  <div class="eeVerticalLine" style="right:225px; top:81px;"></div>
+		  <div class="eeVerticalLine" style="right:225px; top:324px;"></div>
+
+		  <!--Final Four -->
+		  <div  class="flavorOptionsInactive" onclick="ffOne.advance('favorite')"  id="ffOneFavorite" style="top:87px; left:282px"></div>
+		  <div   class="flavorOptionsInactive"  onclick="ffOne.advance('underdog')" id="ffOneUnderdog" style="top:327px; left:282px"></div>
+
+ 		  <div  class="flavorOptionsInactive"  onclick="ffTwo.advance('favorite')" id="ffTwoFavorite" style="top:87px; right:282px;"></div>
+		  <div  class="flavorOptionsInactive"  onclick="ffTwo.advance('underdog')" id="ffTwoUnderdog" style="top:327px; right:282px;"></div>
+
+		    <div class="ffVerticalLine" style="left:351px; top:140px;"></div>
+		   <div class="ffVerticalLine" style="right:351px; top:140px;"></div>
+
+		  <!--Championship -->
+		   <div  class="flavorOptionsInactive"  id="championshipFavorite" style="top:177px; left:400px;"></div>
+		  <div  class="flavorOptionsInactive"   id="championshipUnderdog" style="top:232px; left:400px;"></div>
+
+		 
+	</div>
 
 
 
 
 
-<div style="width:900px; margin-left:auto; margin-right:auto; margin-top:20px;" id="sectionTwo">
-
-
-	<table>
-		<tr>
-	<td class="flavorOptionsOn" onclick="ssOne.advance('favorite')"  id="ssOneFavorite">Chocolate</td>
-   <td ></td>
-  <td ></td>
-   <td ></td>
-   <td></td>
-  <td></td>
-  <td  class="flavorOptionsOn" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite">Mint</td>
-</tr>
-
-<tr>
-		<td class="flavorOptionsOn" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog">King Cake</td>
-  <td  class="flavorOptionsOff" onclick="eeOne.advance('favorite')"  id="eeOneFavorite"></td>
-  <td></td>
-   <td ></td>
-    <td class="flavorOptionsOff"  onclick="ffTwo.advance('favorite')"  id="ffTwoFavorite"></td>
-  <td class="flavorOptionsOff" onclick="eeThree.advance('favorite')" id="eeThreeFavorite"></td>
- 	<td class="flavorOptionsOn" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog">Peanut Butter</td>
-</tr>
-
-
-<tr>
-		<td class="flavorOptionsOn" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite">Vanilla</td>
-   <td  class="flavorOptionsOff" onclick="eeOne.advance('underdog')" id="eeOneUnderdog"></td>
-   <td class="flavorOptionsOff" onclick="ffOne.advance('favorite')"  id="ffOneFavorite"></td>
-   <td class="flavorOptionsOff" onclick="championship.advance('favorite')"  id="championshipFavorite"></td> 
-    <td ></td>
-   <td class="flavorOptionsOff" onclick="eeThree.advance('underdog')" id="eeThreeUnderdog"></td>
- 	<td class="flavorOptionsOn" onclick="ssSix.advance('favorite')"  id="ssSixFavorite">Blueberry</td>
-</tr>
-<tr>
-	<td class="flavorOptionsOn" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog">Strawberry</td>
-   <td ></td>
-  <td ></td>
-   <td ></td>
-   <td></td>
-  <td></td>
-  <td  class="flavorOptionsOn" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog">Cookies n Cream</td>
-</tr>
-
-<tr>
-		<td class="flavorOptionsOn"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite">Wedding Cake</td>
-   <td class="flavorOptionsOff" onclick="eeTwo.advance('favorite')" id="eeTwoFavorite"></td>
-<td class="flavorOptionsOff" onclick="ffOne.advance('underdog')" id="ffOneUnderdog"></td>
-  <td class="flavorOptionsOff"  id="championshipUnderdog" ></td> 
-<td class="flavorOptionsOff" onclick="ffTwo.advance('underdog')" id="ffTwoUnderdog"></td>
-   <td class="flavorOptionsOff" onclick="eeFour.advance('favorite')" id="eeFourFavorite"></td>
- 	<td class="flavorOptionsOn" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite">Salted Caramel</td>
-</tr>
-<tr>
-		<td class="flavorOptionsOn" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog">16_12</td>
-   <td class="flavorOptionsOff" onclick="eeTwo.advance('underdog')" id="eeTwoUnderdog"></td>
-  <td ></td>
-   <td ></td>
-   <td></td>
- <td class="flavorOptionsOff" onclick="eeFour.advance('underdog')" id="eeFourUnderdog"></td>
-	<td class="flavorOptionsOn" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog">Apple Pie</td>
-</tr>
-<tr>
-	<td class="flavorOptionsOn" onclick="ssFour.advance('favorite')"  id="ssFourFavorite">16_7</td>
-   <td ></td>
-  <td ></td>
-   <td ></td>
-   <td></td>
-  <td></td>
-  <td  class="flavorOptionsOn" onclick="ssEight.advance('favorite')"  id="ssEightFavorite">Espresso</td>
-</tr>
-<tr>
-	<td class="flavorOptionsOn" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog">16_10</td>
-   <td ></td>
-  <td ></td>
-   <td ></td>
-   <td></td>
-  <td></td>
-  <td  class="flavorOptionsOn" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog">StrawberryCheesecake</td>
-</tr>
-</table>
-
-
-<div style="clear:both"></div>
-</div>
-
-<div class="section" style="visibility:hidden">
-	<div class="circle"><span class="circleNumber">3</span></div>
-	<div class="sectionTitle">Enter your email</div>
-<div style="clear:both"></div>
-</div>
-
-<div class="section">
-<div class="btnSubmit">
-	submit
-</div>
-</div>
 </body>
 
 </html>
