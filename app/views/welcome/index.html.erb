@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<script>
 	var currentRound = 1;
 	var matchupsInRound = 8;
@@ -18,13 +19,18 @@ function Matchup(round,favorite,underdog, target){
 	Matchup.prototype.advance = function(winner){
 	
 		if(this.active == 1){
+		document.getElementById(this.targetPos).className = "disabledOff";
 		if(winner == "favorite"){
 			this.winner = document.getElementById(this.favorite).innerHTML;
+			console.log(document.getElementById(this.favorite).innerHTML);
+		
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.favorite).innerHTML;
 			document.getElementById(this.favorite).className = "flavorOptionsOn";
 			document.getElementById(this.underdog).className = "flavorOptionsOff";
+			document.getElementById(this.targetPos).classList.add('twoLiner');
 		}
 		else{
+				console.log(document.getElementById(this.underdog).innerHTML);
 			this.winner = document.getElementById(this.underdog).innerHTML;
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.underdog).innerHTML;
 			document.getElementById(this.underdog).className = "flavorOptionsOn";
@@ -131,7 +137,7 @@ matchups.push(championship, ffOne, ffTwo, eeOne, eeTwo, eeThree, eeFour, ssOne, 
 </div>
 
 
-
+  
 
 
 
@@ -140,30 +146,31 @@ matchups.push(championship, ffOne, ffTwo, eeOne, eeTwo, eeThree, eeFour, ssOne, 
 
 	<div id="bracket" style="position:relative; height:460px; margin-left:auto; margin-right:auto; margin-top:20px;  width:930px;">
 
-		<!--Sweet Sixteen -->
-		<div class="flavorOptionsOff" onclick="ssOne.advance('favorite')"  id="ssOneFavorite" style="top:0px; left:0px">Chocolate</div>
-		<div class="flavorOptionsOff" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog" style="top:50px; left:0px">King Cake</div>
 
-		<div class="flavorOptionsOff" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite" style="top:120px; left:0px">Vanilla</div>
-		<div class="flavorOptionsOff" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog" style="top:170px; left:0px">Strawberry</div>
+		<!-- Sweet Sixteen -->
+		 <div class="flavorOptionsOff" onclick="ssOne.advance('favorite')"  id="ssOneFavorite" style="top:0px; left:0px"><p>Chocolate</p></div>
+		<div class="flavorOptionsOff" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog" style="top:50px; left:0px"><p>King Cake</p></div>
 
-		<div class="flavorOptionsOff"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite" style="top:240px; left:0px">Wedding Cake</div>
-		<div class="flavorOptionsOff" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog" style="top:290px; left:0px">16_12</div>
+		<div class="flavorOptionsOff" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite" style="top:120px; left:0px"><p>Vanilla</p></div>
+		<div class="flavorOptionsOff" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog" style="top:170px; left:0px"><p>Strawberry</p></div>
 
-		<div class="flavorOptionsOff" onclick="ssFour.advance('favorite')"  id="ssFourFavorite" style="top:360px; left:0px">Tiramisu</div>
-		<div class="flavorOptionsOff" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog" style="top:410px; left:0px">16_10</div>
+		<div class="flavorOptionsOff"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite" style="top:240px; left:0px"><p>Wedding Cake</p></div>
+		<div class="flavorOptionsOff" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog" style="top:290px; left:0px"><p>16_12</p></div>
 
-		<div  class="flavorOptionsOff" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite" style="top:0px; right:0px">Mint</div>
-		<div class="flavorOptionsOff" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog" style="top:50px; right:0px">Peanut Butter</div>
+		<div class="flavorOptionsOff" onclick="ssFour.advance('favorite')"  id="ssFourFavorite" style="top:360px; left:0px"><p>Tiramisu</p></div>
+		<div class="flavorOptionsOff" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog" style="top:410px; left:0px"><p>16_10</p></div>
+
+		<div  class="flavorOptionsOff" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite" style="top:0px; right:0px"><p>Mint</p></div>
+		<div class="flavorOptionsOff" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog" style="top:50px; right:0px"><p>Peanut Butter</p></div>
 		
-		<div class="flavorOptionsOff" onclick="ssSix.advance('favorite')"  id="ssSixFavorite" style="top:120px; right:0px">Blueberry</div>
-		<div  class="flavorOptionsOff" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog" style="top:170px; right:0px">Cookies n Cream</div>
+		<div class="flavorOptionsOff" onclick="ssSix.advance('favorite')"  id="ssSixFavorite" style="top:120px; right:0px"><p>Blueberry</p></div>
+		<div  class="flavorOptionsOff" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog" style="top:170px; right:0px"><p>Cookies n Cream</p></div>
 		
-		<div class="flavorOptionsOff" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite" style="top:240px; right:0px">Salted Caramel</div>
-		<div  class="flavorOptionsOff" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog" style="top:290px; right:0px">StrawberryCheesecake</div>
+		<div class="flavorOptionsOff" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite" style="top:240px; right:0px"><p>Salted Caramel</p></div>
+		<div  class="flavorOptionsOff" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog" style="top:290px; right:0px"><p>Strawberry Cheesecake</p></div>
 
-		<div  class="flavorOptionsOff" onclick="ssEight.advance('favorite')"  id="ssEightFavorite" style="top:360px; right:0px">Espresso</div>
-		<div  class="flavorOptionsOff" onclick="ssEight.advance('underdog')"  id="ssEightUnderdog" style="top:410px; right:0px">Espresso</div>
+		<div  class="flavorOptionsOff" onclick="ssEight.advance('favorite')"  id="ssEightFavorite" style="top:360px; right:0px"><p>Espresso</p></div>
+		<div  class="flavorOptionsOff" onclick="ssEight.advance('underdog')"  id="ssEightUnderdog" style="top:410px; right:0px"><p>Peanut Butter Chocolate Chip</p></div>
 		
 		<!--Elite Eight -->
 		  <div  class="flavorOptionsInactive" onclick="eeOne.advance('favorite')"  id="eeOneFavorite" style="top:27px; left:155px"></div>
