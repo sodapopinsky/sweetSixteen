@@ -71,8 +71,8 @@ height: 0;
    src: asset-url('SerifaBold.otf?#iefix') format('opentype');
 }
 
-$font-stack:  SerifaBold, Helvetica, sans-serif;
-$primary-color: #444;
+$font-stack:  Serifa, Helvetica, sans-serif;
+$primary-color: #525A61;
 $blue: #9BDED7;
 $lightGray: #F1F1F1;
 $mediumGray: #CCC;
@@ -86,24 +86,24 @@ body {
 
 .header {
 height:85px;
-background-color:#C50200;
+background-color:#b9202e;
 }
 
-h1{
+.title{
 	font-family:myBemio;
-	color:$darkGray; 
-	font-size:22px;
-	 -webkit-font-smoothing: antialiased;
-	 margin:0px;
-	 padding:0px;
-	 margin-left:120px; 
+		font-size:46px;
+		text-transform: uppercase;
+-webkit-font-smoothing: antialiased;
+
 }
-h2{
-	color:$darkGray; 
+.subtitle{
+	/*color:$darkGray; */
+	font-family:Serifa-Bold;
+	width:960px;
 	font-size:15px;
+	margin-right:auto;
 	 font: 100% $font-stack;
-	 -webkit-font-smoothing: antialiased;
-	 margin-left:120px; 
+	 
 }
 .logo{
 	width:960px;
@@ -117,20 +117,18 @@ h2{
 
 .blueSubHeader{
 color:#FFFFFF;
-font-family:myBemio;
-font-size:28px;
-height:43px;
 background-color:#9BDED7;
 padding-top:15px;
 padding-left:0px;
--webkit-font-smoothing: antialiased;
+
+padding-bottom:20px;
 }
 
 
-.subHeaderText{
-	width:960px;
-	margin-left:auto;
-	margin-right:auto;
+.subHeaderContainer{
+width:960px;
+margin-left:auto;
+margin-right:auto;
 }
 
 
@@ -163,6 +161,7 @@ padding-left:0px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
+  margin-bottom:200px;
 }
 
 .welcome{
@@ -183,7 +182,7 @@ padding-left:0px;
 	 margin-left:auto; 
 	 margin-right:auto;
 	  width:900px; 
-	  color:$darkGray;
+	  /*color:$darkGray;*/
 	-webkit-font-smoothing: antialiased;
 		-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -232,7 +231,7 @@ padding-left:0px;
 .flavorOptionsOff
 {
 	color:#FFF;
-	background-color:$darkGray;
+	background-color:$primary-color;
 	cursor:auto;
 }
 .flavorOptionsOff:hover{
@@ -247,14 +246,32 @@ color:#FFF;
 	background-color:$mediumGray;
 }
 
+.completionModal{
+	position:relative; 
+	margin:auto; 
+	top:80px; 
+	width:600px; 
+	height: 300px;
+	color:#FFF;
+	font-size:17px;
+	background-color:$primary-color; 
+		-webkit-font-smoothing: antialiased;
+	box-shadow: none;
+	-webkit-border-radius: 21px;
+	-moz-border-radius: 21px;
+	-ms-border-radius: 21px;
+	-o-border-radius: 21px;
+	border-radius: 21px;
+}
 
 .btnSubmit{
-	background-color:#DED516;
+	background-color:#ddd334;
+	letter-spacing: .2em;
 	font-family:myBemio;
 	color:#FFF;
-	font-size:26px;
+	font-size:21px;
+	width:100px;
 	padding:5px 20px 5px 20px;
-	float:left;
 	-webkit-font-smoothing: antialiased;
 	box-shadow: none;
 	-webkit-border-radius: 6px;
@@ -262,8 +279,27 @@ color:#FFF;
 	-ms-border-radius: 6px;
 	-o-border-radius: 6px;
 	border-radius: 6px;
+	margin:auto;
+	text-transform: uppercase;
+	cursor:pointer;
+}
+input {
+	font-family: $font-stack;
+	font-size:16px;
+	border:none;
+	padding:10px;
+	padding-top:15px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
 }
 
+.btnSubmit:hover{
+	color:#b9202e;
+	background-color:#9fded7;
+}
 .eeVerticalLine{
 	border-left:1px solid $mediumGray;
 	height:50px;

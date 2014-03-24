@@ -16,6 +16,7 @@ function Matchup(round,favorite,underdog, target){
 	if(round == 1) { this.active = 1; }
 	}
 	Matchup.prototype.advance = function(winner){
+	
 		if(this.active == 1){
 		if(winner == "favorite"){
 			this.winner = document.getElementById(this.favorite).innerHTML;
@@ -26,7 +27,6 @@ function Matchup(round,favorite,underdog, target){
 		else{
 			this.winner = document.getElementById(this.underdog).innerHTML;
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.underdog).innerHTML;
-
 			document.getElementById(this.underdog).className = "flavorOptionsOn";
 			document.getElementById(this.favorite).className = "flavorOptionsOff";
 		}
@@ -52,7 +52,7 @@ function nextRound(){
 	currentRound++;
 	for(var i = 0; i < matchups.length; i++){
 		var match = matchups[i];
-		if(match.winner){
+		if(match.winner && match.active == 1){
 			if(document.getElementById(match.favorite).className == "flavorOptionsOn")
 			document.getElementById(match.favorite).className = "disabledOn";
 			else
@@ -68,6 +68,7 @@ function nextRound(){
 		}
 		if(match.round == currentRound){
 			match.active = 1;
+			
 			document.getElementById(match.favorite).className = "flavorOptionsOff";
 			document.getElementById(match.underdog).className = "flavorOptionsOff";
 		}
@@ -76,6 +77,18 @@ function nextRound(){
 	if(currentRound == 3){matchupsInRound = 2;}
 	if(currentRound == 4){matchupsInRound = 1;}
 
+}
+
+function bracketComplete(winner){
+if(winner == "favorite"){
+document.getElementById("championshipFavorite").className = "flavorOptionsOn";
+document.getElementById("championshipUnderdog").className = "flavorOptionsOff";
+}
+else{
+document.getElementById("championshipUnderdog").className = "flavorOptionsOn";
+document.getElementById("championshipFavorite").className = "flavorOptionsOff";
+}
+document.getElementById("completionModal").style.visibility = "visible";
 }
 
 
@@ -110,7 +123,13 @@ matchups.push(championship, ffOne, ffTwo, eeOne, eeTwo, eeThree, eeFour, ssOne, 
 <body>
 <div class="header"><div class="logo"></div></div>
 <div style="height:5px; background-color:#B68076;"></div>
-<div class="blueSubHeader"><div class="subHeaderText">Sweet Sixteen Tournament</div></div>
+<div class="blueSubHeader">
+<div class="subHeaderContainer">
+<div class="title" style="margin-top:10px;">Sweet Sixteen Tournament</div>
+<div class="subtitle" style="width:850px; margin-top:10px;">What do you think the most popular flavors are?  Fill out your bracket below.  If you get it right, we’ll give you something sweet!</div>
+</div>
+</div>
+
 
 
 
@@ -118,14 +137,7 @@ matchups.push(championship, ffOne, ffTwo, eeOne, eeTwo, eeThree, eeFour, ssOne, 
 
 
 <div class="container">
-	<div class="welcome">
-		<div class="picCircle"></div>
-		<h1 style="margin-top:5px;">Hi Person!</h1>
-		<h2>Welcome to our sweet sixteen tournament!</h2>
-	</div>
-	<div class="whiteBox">
-	What do you think the most popular flavors are?  Fill out your bracket below.  If you get it right, we’ll give you something sweet!
-</div>
+
 	<div id="bracket" style="position:relative; height:460px; margin-left:auto; margin-right:auto; margin-top:20px;  width:930px;">
 
 		<!--Sweet Sixteen -->
@@ -182,10 +194,20 @@ matchups.push(championship, ffOne, ffTwo, eeOne, eeTwo, eeThree, eeFour, ssOne, 
 		   <div class="ffVerticalLine" style="right:351px; top:140px;"></div>
 
 		  <!--Championship -->
-		   <div  class="flavorOptionsInactive"  id="championshipFavorite" style="top:177px; left:400px;"></div>
-		  <div  class="flavorOptionsInactive"   id="championshipUnderdog" style="top:232px; left:400px;"></div>
+		   <div  class="flavorOptionsInactive"  onclick="bracketComplete('favorite')" id="championshipFavorite" style="top:177px; left:400px;"></div>
+		  <div  class="flavorOptionsInactive"   onclick="bracketComplete('underdog')" id="championshipUnderdog" style="top:232px; left:400px;"></div>
 
+		 <div class="completionModal" id="completionModal" style="visibility:hidden">
+
+		 <div style="width:500px; font-size:22px; text-align:center; margin-left:auto; margin-right:auto; padding-top:30px; ">Your bracket is complete!</div>
+		 <div style="margin:auto; margin-left:auto; margin-right:auto; padding-top:20px; text-align:center; ">Enter your email so we can send you a copy</div>
+		 <div style="margin:auto; padding-top:20px; width:500px; margin-bottom:25px;">
+		 <input type="email" style="margin-left:auto; marign-right:auto; width:460px;" placeholder="Your email address"></div>
 		 
+	<div class = "btnSubmit">submit</div>
+		 </div>
+
+
 	</div>
 
 
