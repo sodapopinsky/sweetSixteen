@@ -3,42 +3,104 @@
 <html>
 <head>
 	<script>
-	
-function Matchup(favorite,underdog, target){
+	var currentRound = 1;
+	var matchupsInRound = 8;
+
+function Matchup(round,favorite,underdog, target){
+	this.round = round;
 	this.favorite = favorite;
 	this.underdog = underdog;
 	this.targetPos = target;
+	this.winner = null;
+	this.active = 0;
+	if(round == 1) { this.active = 1; }
 	}
 	Matchup.prototype.advance = function(winner){
+		if(this.active == 1){
 		if(winner == "favorite"){
+			this.winner = document.getElementById(this.favorite).innerHTML;
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.favorite).innerHTML;
-			document.getElementById(this.targetPos).className = "flavorOptionsOn";
+			document.getElementById(this.favorite).className = "flavorOptionsOn";
+			document.getElementById(this.underdog).className = "flavorOptionsOff";
 		}
 		else{
+			this.winner = document.getElementById(this.underdog).innerHTML;
 			document.getElementById(this.targetPos).innerHTML = document.getElementById(this.underdog).innerHTML;
-			document.getElementById(this.targetPos).className = "flavorOptionsOn";
-		}
 
+			document.getElementById(this.underdog).className = "flavorOptionsOn";
+			document.getElementById(this.favorite).className = "flavorOptionsOff";
+		}
+		isNewRound();
+		}
 	}
 
-var championship = new Matchup('championshipFavorite','championshipUnderdog', null);
-var ffOne = new Matchup('ffOneFavorite','ffOneUnderdog', 'championshipFavorite');
-var ffTwo = new Matchup('ffTwoFavorite','ffTwoUnderdog', 'championshipUnderdog');
+function isNewRound(){
+	var completedMatches = 0;
+	for(var i = 0; i < matchups.length; i++){
+		var match = matchups[i];
+		if(match.round == currentRound){
+			if(match.winner){
+			completedMatches++;
+		}
+	}
+		
+	}
+if(completedMatches >= matchupsInRound) { nextRound();}
+}
 
-var eeOne = new Matchup('eeOneFavorite','eeOneUnderdog', 'ffOneFavorite');
-var eeTwo = new Matchup('eeTwoFavorite','eeTwoUnderdog', 'ffOneUnderdog');
-var eeThree = new Matchup('eeThreeFavorite','eeThreeUnderdog', 'ffTwoFavorite');
-var eeFour = new Matchup('eeFourFavorite','eeFourUnderdog', 'ffTwoUnderdog');
+function nextRound(){
+	currentRound++;
+	for(var i = 0; i < matchups.length; i++){
+		var match = matchups[i];
+		if(match.winner){
+			if(document.getElementById(match.favorite).className == "flavorOptionsOn")
+			document.getElementById(match.favorite).className = "disabledOn";
+			else
+			document.getElementById(match.favorite).className = "disabledOff";
 
-var ssOne = new Matchup('ssOneFavorite','ssOneUnderdog',  'eeOneFavorite');
-var ssTwo = new Matchup('ssTwoFavorite','ssTwoUnderdog',  'eeOneUnderdog');
-var ssThree = new Matchup('ssThreeFavorite','ssThreeUnderdog', 'eeTwoFavorite');
-var ssFour = new Matchup('ssFourFavorite','ssFourUnderdog','eeTwoUnderdog');
+			if(document.getElementById(match.underdog).className == "flavorOptionsOn")
+			document.getElementById(match.underdog).className = "disabledOn";
+			else
+			document.getElementById(match.underdog).className = "disabledOff";
 
-var ssFive = new Matchup('ssFiveFavorite','ssFiveUnderdog',  'eeThreeFavorite');
-var ssSix = new Matchup('ssSixFavorite','ssSixUnderdog',  'eeThreeUnderdog');
-var ssSeven = new Matchup('ssSevenFavorite','ssSevenUnderdog', 'eeFourFavorite');
-var ssEight = new Matchup('ssEightFavorite','ssEightUnderdog','eeFourUnderdog');
+			
+			match.active = 0;
+		}
+		if(match.round == currentRound){
+			match.active = 1;
+			document.getElementById(match.favorite).className = "flavorOptionsOff";
+			document.getElementById(match.underdog).className = "flavorOptionsOff";
+		}
+	}
+	if(currentRound == 2){matchupsInRound = 4;}
+	if(currentRound == 3){matchupsInRound = 2;}
+	if(currentRound == 4){matchupsInRound = 1;}
+
+}
+
+
+var championship = new Matchup(4,'championshipFavorite','championshipUnderdog', null);
+
+var ffOne = new Matchup(3,'ffOneFavorite','ffOneUnderdog', 'championshipFavorite');
+var ffTwo = new Matchup(3,'ffTwoFavorite','ffTwoUnderdog', 'championshipUnderdog');
+
+var eeOne = new Matchup(2,'eeOneFavorite','eeOneUnderdog', 'ffOneFavorite');
+var eeTwo = new Matchup(2,'eeTwoFavorite','eeTwoUnderdog', 'ffOneUnderdog');
+var eeThree = new Matchup(2,'eeThreeFavorite','eeThreeUnderdog', 'ffTwoFavorite');
+var eeFour = new Matchup(2,'eeFourFavorite','eeFourUnderdog', 'ffTwoUnderdog');
+
+var ssOne = new Matchup(1,'ssOneFavorite','ssOneUnderdog',  'eeOneFavorite');
+var ssTwo = new Matchup(1,'ssTwoFavorite','ssTwoUnderdog',  'eeOneUnderdog');
+var ssThree = new Matchup(1,'ssThreeFavorite','ssThreeUnderdog', 'eeTwoFavorite');
+var ssFour = new Matchup(1,'ssFourFavorite','ssFourUnderdog','eeTwoUnderdog');
+
+var ssFive = new Matchup(1,'ssFiveFavorite','ssFiveUnderdog',  'eeThreeFavorite');
+var ssSix = new Matchup(1,'ssSixFavorite','ssSixUnderdog',  'eeThreeUnderdog');
+var ssSeven = new Matchup(1,'ssSevenFavorite','ssSevenUnderdog', 'eeFourFavorite');
+var ssEight = new Matchup(1,'ssEightFavorite','ssEightUnderdog','eeFourUnderdog');
+
+var matchups = new Array();
+matchups.push(championship, ffOne, ffTwo, eeOne, eeTwo, eeThree, eeFour, ssOne, ssTwo, ssThree, ssFour, ssFive, ssSix, ssSeven, ssEight);
 
 </script>
 
@@ -67,29 +129,29 @@ var ssEight = new Matchup('ssEightFavorite','ssEightUnderdog','eeFourUnderdog');
 	<div id="bracket" style="position:relative; height:460px; margin-left:auto; margin-right:auto; margin-top:20px;  width:930px;">
 
 		<!--Sweet Sixteen -->
-		<div class="flavorOptionsOn" onclick="ssOne.advance('favorite')"  id="ssOneFavorite" style="top:0px; left:0px">Chocolate</div>
-		<div class="flavorOptionsOn" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog" style="top:50px; left:0px">King Cake</div>
+		<div class="flavorOptionsOff" onclick="ssOne.advance('favorite')"  id="ssOneFavorite" style="top:0px; left:0px">Chocolate</div>
+		<div class="flavorOptionsOff" onclick="ssOne.advance('underdog')"  id="ssOneUnderdog" style="top:50px; left:0px">King Cake</div>
 
-		<div class="flavorOptionsOn" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite" style="top:120px; left:0px">Vanilla</div>
-		<div class="flavorOptionsOn" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog" style="top:170px; left:0px">Strawberry</div>
+		<div class="flavorOptionsOff" onclick="ssTwo.advance('favorite')" id="ssTwoFavorite" style="top:120px; left:0px">Vanilla</div>
+		<div class="flavorOptionsOff" onclick="ssTwo.advance('underdog')" id="ssTwoUnderdog" style="top:170px; left:0px">Strawberry</div>
 
-		<div class="flavorOptionsOn"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite" style="top:240px; left:0px">Wedding Cake</div>
-		<div class="flavorOptionsOn" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog" style="top:290px; left:0px">16_12</div>
+		<div class="flavorOptionsOff"  onclick="ssThree.advance('favorite')"  id="ssThreeFavorite" style="top:240px; left:0px">Wedding Cake</div>
+		<div class="flavorOptionsOff" onclick="ssThree.advance('underdog')"  id="ssThreeUnderdog" style="top:290px; left:0px">16_12</div>
 
-		<div class="flavorOptionsOn" onclick="ssFour.advance('favorite')"  id="ssFourFavorite" style="top:360px; left:0px">Tiramisu</div>
-		<div class="flavorOptionsOn" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog" style="top:410px; left:0px">16_10</div>
+		<div class="flavorOptionsOff" onclick="ssFour.advance('favorite')"  id="ssFourFavorite" style="top:360px; left:0px">Tiramisu</div>
+		<div class="flavorOptionsOff" onclick="ssFour.advance('underdog')"  id="ssFourUnderdog" style="top:410px; left:0px">16_10</div>
 
-		<div  class="flavorOptionsOn" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite" style="top:0px; right:0px">Mint</div>
-		<div class="flavorOptionsOn" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog" style="top:50px; right:0px">Peanut Butter</div>
+		<div  class="flavorOptionsOff" onclick="ssFive.advance('favorite')"  id="ssFiveFavorite" style="top:0px; right:0px">Mint</div>
+		<div class="flavorOptionsOff" onclick="ssFive.advance('underdog')"  id="ssFiveUnderdog" style="top:50px; right:0px">Peanut Butter</div>
 		
-		<div class="flavorOptionsOn" onclick="ssSix.advance('favorite')"  id="ssSixFavorite" style="top:120px; right:0px">Blueberry</div>
-		<div  class="flavorOptionsOn" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog" style="top:170px; right:0px">Cookies n Cream</div>
+		<div class="flavorOptionsOff" onclick="ssSix.advance('favorite')"  id="ssSixFavorite" style="top:120px; right:0px">Blueberry</div>
+		<div  class="flavorOptionsOff" onclick="ssSix.advance('underdog')"  id="ssSixUnderdog" style="top:170px; right:0px">Cookies n Cream</div>
 		
-		<div class="flavorOptionsOn" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite" style="top:240px; right:0px">Salted Caramel</div>
-		<div  class="flavorOptionsOn" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog" style="top:290px; right:0px">StrawberryCheesecake</div>
+		<div class="flavorOptionsOff" onclick="ssSeven.advance('favorite')"  id="ssSevenFavorite" style="top:240px; right:0px">Salted Caramel</div>
+		<div  class="flavorOptionsOff" onclick="ssSeven.advance('underdog')"  id="ssSevenUnderdog" style="top:290px; right:0px">StrawberryCheesecake</div>
 
-		<div  class="flavorOptionsOn" onclick="ssEight.advance('favorite')"  id="ssEightFavorite" style="top:360px; right:0px">Espresso</div>
-		<div  class="flavorOptionsOn" onclick="ssEight.advance('underdog')"  id="ssEightUnderdog" style="top:410px; right:0px">Espresso</div>
+		<div  class="flavorOptionsOff" onclick="ssEight.advance('favorite')"  id="ssEightFavorite" style="top:360px; right:0px">Espresso</div>
+		<div  class="flavorOptionsOff" onclick="ssEight.advance('underdog')"  id="ssEightUnderdog" style="top:410px; right:0px">Espresso</div>
 		
 		<!--Elite Eight -->
 		  <div  class="flavorOptionsInactive" onclick="eeOne.advance('favorite')"  id="eeOneFavorite" style="top:27px; left:155px"></div>

@@ -193,7 +193,7 @@ padding-left:0px;
 	font-size:14px;
 
 }
-.flavorOptionsOn, .flavorOptionsOff, .flavorOptionsInactive{
+.flavorOptionsOn, .flavorOptionsOff, .disabledOn, .disabledOff, .flavorOptionsInactive{
 	cursor:pointer;
 	height:30px;
 	width:140px;
@@ -209,6 +209,19 @@ padding-left:0px;
 		-webkit-font-smoothing: antialiased;
 
 }
+.disabledOn{
+	background-color:$blue;
+	color:#FFFFFF;
+	cursor:auto;
+	opacity:.5;
+}
+
+.disabledOff{
+	color:#FFF;
+	background-color:$darkGray;
+	cursor:auto;
+	opacity:.5;
+}
 
 .flavorOptionsOn
 {
@@ -221,8 +234,13 @@ padding-left:0px;
 	color:#FFF;
 	background-color:$darkGray;
 	cursor:auto;
-
 }
+.flavorOptionsOff:hover{
+		background-color:$blue;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+
 .flavorOptionsInactive{
 color:#FFF;
 	cursor:auto;
